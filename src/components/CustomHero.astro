@@ -28,17 +28,13 @@
         
         <div class="window-body">
           <pre><code><span class="dim">&lt;script&gt;</span>
-  <span class="kw">import</span> &#123; useForm &#125; <span class="kw">from</span> <span class="str">'svelte5-hook-form'</span>;
+  <span class="kw">import</span> &#123; createForm &#125; <span class="kw">from</span> <span class="str">'svelte5-hook-form'</span>;
 
   <span class="com">// Native Svelte 5 Runes support</span>
-  <span class="kw">const</span> &#123; register, handleSubmit, errors &#125; = <span class="var">$state</span>(useForm());
-
-  <span class="kw">const</span> onSubmit = (data) =&gt; &#123;
-    <span class="var">console</span>.log(data);
-  &#125;;
+  <span class="kw">const</span> &#123; register, handleSubmit, errors &#125; = <span class="var">createForm()</span>;
 <span class="dim">&lt;/script&gt;</span>
 
-<span class="tag">&lt;form onsubmit=&#123;</span>handleSubmit(onSubmit)<span class="tag">&#125;&gt;</span>
+<span class="tag">&lt;form onsubmit=&#123;</span>handleSubmit<span class="tag">&#125;&gt;</span>
   <span class="tag">&lt;input ...&#123;</span>register(<span class="str">'email'</span>, &#123; required: <span class="kw">true</span> &#125;)<span class="tag">&#125; /&gt;</span>
   <span class="var">&#123;#if $errors.email&#125;</span>
     <span class="tag">&lt;span&gt;</span>Email is required<span class="tag">&lt;/span&gt;</span>

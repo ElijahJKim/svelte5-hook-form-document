@@ -21,12 +21,17 @@ export default defineConfig({
           label: "Guides",
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
+            { label: "Introduction", slug: "guides/introduction" },
+            { label: "Quick Start", slug: "guides/quick-start" },
+            { label: "Core Concepts", slug: "guides/core-concept" },
           ],
         },
         {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
+          label: "API Reference",
+          items: [
+            { label: "Form Status", slug: "api/form-status" },
+            { label: "Methods", slug: "api/methods" },
+          ],
         },
       ],
     }),
