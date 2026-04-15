@@ -10,9 +10,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Svelte5 Hook Form",
+      favicon: "/icon.png",
       customCss: ["./src/styles/starlight-theme.css"],
       components: {
         SocialIcons: "./src/components/starlight/SocialIcons.astro",
+        SiteTitle: "./src/components/starlight/SiteTitle.astro",
       },
       social: [
         {

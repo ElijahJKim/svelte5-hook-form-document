@@ -98,6 +98,11 @@
   border-radius: 999px;
 }
 
+/* Header (SiteTitle) + Footer: "Svelte5" brand mark */
+.brand-svelte5 {
+  color: #fe3f00;
+}
+
 /* GitHub 소셜 아이콘: 기본은 브랜드 톤, hover만 액센트 오렌지
    (Starlight SocialIcons는 Astro 스코프 + @layer로 hover가 강해서 :where 제거 + hover는 !important) */
 .social-icons a[href*="github.com"] {
