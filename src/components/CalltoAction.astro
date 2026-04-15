@@ -1,6 +1,8 @@
---- /* docs/src/components/CallToAction.astro */ ---
+---
+const NPM_INSTALL = "npm install svelte5-hook-form";
+---
 
-<section class="cta-section">
+<section class="cta-section" data-cta-npm>
   <div class="cta-card">
     <div class="glow-effect"></div>
 
@@ -15,11 +17,75 @@
         <a href="/guides/introduction/" class="btn primary">
           Start Documentation
         </a>
-        <button class="btn secondary"> Install via NPM </button>
+        <button
+          type="button"
+          class="btn secondary"
+          data-npm-copy
+          data-install-cmd={NPM_INSTALL}
+          aria-label={`Copy to clipboard: ${NPM_INSTALL}`}
+        >
+          <span class="btn-label" data-npm-label>Install via NPM</span>
+        </button>
       </div>
+      <p
+        class="visually-hidden"
+        role="status"
+        aria-live="polite"
+        data-npm-status
+      ></p>
     </div>
   </div>
 </section>
+
+<script>
+  const root = document.querySelector("[data-cta-npm]");
+  const btn = root?.querySelector("[data-npm-copy]");
+  const labelEl = root?.querySelector("[data-npm-label]");
+  const statusEl = root?.querySelector("[data-npm-status]");
+
+  const defaultLabel = "Install via NPM";
+  const copiedLabel = "Copied!";
+  const resetMs = 2000;
+
+  async function copyToClipboard(text) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  let resetTimer = 0;
+
+  btn?.addEventListener("click", async () => {
+    if (!labelEl || !statusEl || !btn) return;
+    const cmd = btn.dataset.installCmd;
+    if (!cmd) return;
+
+    try {
+      await copyToClipboard(cmd);
+      labelEl.textContent = copiedLabel;
+      statusEl.textContent = "Install command copied to clipboard.";
+      window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => {
+        labelEl.textContent = defaultLabel;
+        statusEl.textContent = "";
+      }, resetMs);
+    } catch {
+      statusEl.textContent =
+        "Could not copy. Select the command from the quick start guide.";
+    }
+  });
+</script>
 
 <style>
   .cta-section {
@@ -104,10 +170,13 @@
   }
 
   .btn.secondary {
+    min-width: 14rem;
+    justify-content: center;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    font-family: ui-monospace, SFMono-Regular, MENLO, monospace; /* NPM 설치용 폰트 */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
   }
 
   .btn.secondary:hover {
@@ -116,9 +185,16 @@
     transform: translateY(-2px);
   }
 
-  .copy-icon {
-    font-size: 0.8rem;
-    opacity: 0.5;
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   @media (max-width: 768px) {

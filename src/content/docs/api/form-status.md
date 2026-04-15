@@ -86,25 +86,51 @@ Great for showing "Unsaved Changes" warnings or resetting buttons.
 
 ## `touchedFields`
 
-`touchedFields` is a reactive `Set` that contains the names of all fields the user has interacted with (focused and then blurred).
+`touchedFields` is a reactive object that tracks which fields the user has interacted with. A field becomes "touched" (`true`) the moment it loses focus (`blur`).
 
-### Usage
+### Using `mode` with `touchedFields`
 
-Useful for hiding validation errors until a user has actually touched the field, avoiding a "sea of red" on an empty form.
+To get the most out of `touchedFields`, you should pair it with the `mode` option in your `register` function. The `mode` determines the **Validation Timing** (when the error is calculated), while `touchedFields` determines the **Visibility** (when the error is shown).
+
+We **strongly recommend** using `mode` when working with `touchedFields`. This ensures that errors are calculated and displayed only after the user has finished their intent with a specific field.
 
 ```svelte
 <script lang="ts">
-  const { form, errors, register, touchedFields } = createForm({
-    initialValues: { email: "" }
+  const { form, errors, register, touchedFields, isValid, isSubmitting } = createForm({
+    initialValues: { username: "" },
+    onSubmit: (data) => console.log(data),
   });
 </script>
 
-<input
-  bind:value={form.email}
-  {@attach register("email", { required: "Required" })}
-/>
+<div class="field">
+  <label>Username</label>
+  <input
+    bind:value={form.username}
+    {@attach register("username", {
+      required: "Username is required.",
+      mode: "onBlur" // Timing: Calculate the error when leaving the input
+    })}
+  />
 
-{#if touchedFields.has("email") && errors.email}
-  <span class="error">{errors.email}</span>
-{/if}
+  {#if touchedFields.username && errors.username}
+    <p class="error-text">{errors.username}</p>
+  {/if}
+</div>
+
+<button type="submit" disabled={!isValid() || isSubmitting()}>
+  {isSubmitting() ? "Submitting..." : "Submit"}
+</button>
 ```
+
+---
+
+### Comparison of Validation Strategies
+
+While we recommend the `onBlur` + `touchedFields` combination, you can adjust the `mode` based on your needs:
+
+| Mode        | Description                                                           |
+| :---------- | :-------------------------------------------------------------------- |
+| `"onBlur"`  | Triggers validation when the input field loses focus.                 |
+| `"onInput"` | Triggers validation every time the value changes (as the user types). |
+
+---

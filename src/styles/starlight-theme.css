@@ -1,0 +1,123 @@
+:root {
+  --sl-color-accent-low: #2f130b;
+  --sl-color-accent: #fe3f00;
+  --sl-color-accent-high: #ffb49a;
+  --sl-color-text-accent: #fe3f00;
+
+  --sl-color-bg: #0f1117;
+  --sl-color-bg-nav: #161a24;
+  --sl-color-bg-sidebar: #111522;
+  --sl-color-hairline: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #ffe7de;
+  --sl-color-accent: #fe3f00;
+  --sl-color-accent-high: #7f2606;
+  --sl-color-text-accent: #d83400;
+
+  --sl-color-bg: #f6f8fc;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #f8fafc;
+  --sl-color-hairline: rgba(15, 23, 42, 0.14);
+}
+
+:root[data-theme="dark"] :where(header.header) {
+  background-color: rgba(11, 14, 20, 0.8) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="light"] :where(header.header) {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+:root[data-theme="dark"] :where(.sidebar-pane) {
+  background-color: rgba(11, 14, 20, 0.8) !important;
+  backdrop-filter: blur(10px);
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="light"] :where(.sidebar-pane) {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(10px);
+  border-inline-end: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+:where(.sidebar-content a) {
+  border-radius: 0.625rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+:where(.sidebar-content a:hover) {
+  background-color: rgba(254, 63, 0, 0.12);
+}
+
+:root[data-theme="light"] :where(.sidebar-content a:hover) {
+  color: #7f2606;
+}
+
+:where(.sidebar-content a[aria-current="page"]) {
+  background: linear-gradient(
+    90deg,
+    rgba(254, 63, 0, 0.22),
+    rgba(254, 63, 0, 0.06)
+  );
+}
+
+:root[data-theme="dark"] :where(.sidebar-content a[aria-current="page"]) {
+  color: var(--sl-color-white);
+}
+
+:root[data-theme="light"] :where(.sidebar-content a[aria-current="page"]) {
+  color: #7f2606;
+}
+
+:root[data-theme="dark"] :where(.site-title, .site-title a) {
+  color: var(--sl-color-white);
+}
+
+:root[data-theme="light"] :where(.site-title, .site-title a) {
+  color: #111827;
+}
+
+:where(.site-title) {
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+:where(.site-title a:hover) {
+  color: #fe3f00;
+}
+
+:where(.search-stats) {
+  border-radius: 999px;
+}
+
+/* GitHub 소셜 아이콘: 기본은 브랜드 톤, hover만 액센트 오렌지
+   (Starlight SocialIcons는 Astro 스코프 + @layer로 hover가 강해서 :where 제거 + hover는 !important) */
+.social-icons a[href*="github.com"] {
+  color: #181717;
+  transition: color 0.2s ease;
+}
+
+:root[data-theme="dark"] .social-icons a[href*="github.com"] {
+  color: #f0f6fc;
+}
+
+.social-icons a[href*="github.com"]:hover,
+.social-icons a[href*="github.com"]:focus-visible {
+  color: #fe3f00 !important;
+}
+
+:root[data-theme="dark"] :where(.right-sidebar-panel) {
+  border-inline-start: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="light"] :where(.right-sidebar-panel) {
+  border-inline-start: 1px solid rgba(15, 23, 42, 0.1);
+}

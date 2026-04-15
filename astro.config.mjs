@@ -6,9 +6,14 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: false,
   integrations: [
     starlight({
       title: "Svelte5 Hook Form",
+      customCss: ["./src/styles/starlight-theme.css"],
+      components: {
+        SocialIcons: "./src/components/starlight/SocialIcons.astro",
+      },
       social: [
         {
           icon: "github",
