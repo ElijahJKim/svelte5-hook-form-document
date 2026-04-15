@@ -1,0 +1,136 @@
+---
+// docs/src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="brand-section">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 30 50 L 45 65 C 60 50, 75 30, 85 20 C 95 10, 100 30, 80 45 L 45 80 L 20 55 Z" fill="#ff3e00" />
+          <rect x="15" y="15" width="70" height="70" rx="16" stroke="#ff3e00" stroke-width="8" />
+        </svg>
+        <span>Svelte5 Hook Form</span>
+      </div>
+      <p>The new standard for Svelte 5 forms. Type-safe, lightweight, and built with Runes.</p>
+    </div>
+
+    <div class="links-section">
+      <div class="link-column">
+        <h3>Resources</h3>
+        <a href="/guides/introduction/">Documentation</a>
+        <a href="/api/create-form/">API Reference</a>
+        <a href="/guides/quick-start/">Quick Start</a>
+      </div>
+      <div class="link-column">
+        <h3>Community</h3>
+        <a href="https://github.com/엘리야님아이디/svelte5-hook-form">GitHub</a>
+        <a href="https://www.npmjs.com/package/svelte5-hook-form">NPM</a>
+      </div>
+      <div class="link-column">
+        <h3>Legal</h3>
+        <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {currentYear} Elijah. Released under the MIT License.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding: 4rem 2rem 2rem;
+    margin-top: 4rem;
+    background-color: var(--sl-color-bg);
+  }
+
+  .footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .brand-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+    margin-bottom: 1rem;
+  }
+
+  .brand-section p {
+    color: var(--sl-color-gray-3);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .links-section {
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+  }
+
+  .link-column{
+    margin:0;
+  }
+
+  .link-column h3 {
+    color: var(--sl-color-white);
+    font-size: 1rem !important;
+    font-weight: 600;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .link-column a {
+    display: block;
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .link-column a:hover {
+    color: var(--sl-color-accent); /* 호버 시 Svelte 오렌지색으로 변경 */
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--sl-color-gray-6);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    color: var(--sl-color-gray-4);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  /* 모바일 반응형 처리 */
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .links-section {
+      gap: 3rem;
+    }
+  }
+</style>
