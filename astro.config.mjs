@@ -1,8 +1,8 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-
 import svelte from "@astrojs/svelte";
+import analytics from "@vercel/analytics/astro";
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,21 +41,8 @@ export default defineConfig({
           ],
         },
       ],
-      head: [
-        {
-          tag: "script",
-          attrs: {
-            src: "https://cdn.jsdelivr.net/npm/@vercel/analytics/dist/index.js",
-            defer: true,
-          },
-        },
-        {
-          tag: "script",
-          content:
-            'window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); }; va("beforeSend", (event) => { return event; });',
-        },
-      ],
     }),
     svelte(),
+    analytics(),
   ],
 });
