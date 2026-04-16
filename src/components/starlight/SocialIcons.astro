@@ -1,37 +1,17 @@
 ---
 import DefaultSocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+
+const npmHref = "https://www.npmjs.com/package/svelte5-hook-form";
 ---
 
-<a href="/guides/introduction/" class="docs-link">Docs</a>
+<a href="/guides/introduction/" class="header-pill-link">Docs</a>
+<a
+  href={npmHref}
+  class="header-pill-link"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="svelte5-hook-form on npm (opens in a new tab)"
+>
+  NPM
+</a>
 <DefaultSocialIcons />
-
-<style>
-  @layer starlight.core {
-    .docs-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.45rem 0.8rem;
-      border-radius: 0.625rem;
-    
-     
-      color: var(--sl-color-accent);
-      font-size: 0.875rem;
-      font-weight: 700;
-      line-height: 1;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .docs-link:hover {
-      color: var(--sl-color-white);
-     
-      background: color-mix(in srgb, var(--sl-color-accent), transparent 78%);
-    }
-
-    :global(:root[data-theme="light"]) .docs-link:hover {
-      color: #7f2606;
-    }
-  }
-</style>
