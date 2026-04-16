@@ -2,9 +2,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
-import analytics from "@vercel/analytics/astro";
 
-// https://astro.build/config
 export default defineConfig({
   prefetch: false,
   integrations: [
@@ -15,6 +13,7 @@ export default defineConfig({
       components: {
         SocialIcons: "./src/components/starlight/SocialIcons.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
+        Head: "./src/components/starlight/Head.astro",
       },
       social: [
         {
@@ -43,6 +42,5 @@ export default defineConfig({
       ],
     }),
     svelte(),
-    analytics(),
   ],
 });
