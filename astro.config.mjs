@@ -41,6 +41,20 @@ export default defineConfig({
           ],
         },
       ],
+      head: [
+        {
+          tag: "script",
+          attrs: {
+            src: "https://cdn.jsdelivr.net/npm/@vercel/analytics/dist/index.js",
+            defer: true,
+          },
+        },
+        {
+          tag: "script",
+          content:
+            'window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); }; va("beforeSend", (event) => { return event; });',
+        },
+      ],
     }),
     svelte(),
   ],
